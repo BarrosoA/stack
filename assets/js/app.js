@@ -135,30 +135,24 @@
   function getFileIconSvg(type) {
     const t = (type || 'pdf').toLowerCase();
     if (t === 'pdf') {
-      return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
         <polyline points="14 2 14 8 20 8"/>
-        <path d="M9 15h2a1.5 1.5 0 0 0 0-3H9v5"/>
-        <path d="M14 12v5"/>
-        <path d="M14 12h2"/>
-        <path d="M14 14.5h1.5"/>
+        <line x1="8" y1="13" x2="16" y2="13"/>
+        <line x1="8" y1="17" x2="13" y2="17"/>
       </svg>`;
     }
     if (t === 'md') {
-      return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
         <polyline points="14 2 14 8 20 8"/>
-        <path d="M8 17v-5l2 2.5 2-2.5v5"/>
-        <path d="M16 12v5"/>
-        <path d="M14.5 15.5L16 17l1.5-1.5"/>
+        <polyline points="9 15 12 18 15 15"/>
+        <line x1="12" y1="11" x2="12" y2="18"/>
       </svg>`;
     }
-    return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
       <polyline points="14 2 14 8 20 8"/>
-      <line x1="16" y1="13" x2="8" y2="13"/>
-      <line x1="16" y1="17" x2="8" y2="17"/>
-      <line x1="10" y1="9" x2="8" y2="9"/>
     </svg>`;
   }
 
@@ -191,7 +185,7 @@
       left.className = 'doc-left';
 
       const iconWrap = document.createElement('div');
-      iconWrap.className = `doc-type-icon type-${ext}`;
+      iconWrap.className = 'doc-type-icon';
       iconWrap.innerHTML = getFileIconSvg(ext);
       left.appendChild(iconWrap);
 
