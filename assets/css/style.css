@@ -207,12 +207,61 @@ body {
   background-color: var(--bg-row-active);
 }
 
+.doc-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  min-width: 0;
+  flex: 1;
+}
+
+.doc-type-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 5px;
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+.doc-type-icon.type-pdf {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.07);
+  border-color: rgba(248, 113, 113, 0.22);
+}
+
+.doc-type-icon.type-md {
+  color: #60a5fa;
+  background: rgba(96, 165, 250, 0.07);
+  border-color: rgba(96, 165, 250, 0.22);
+}
+
+.doc-type-icon.type-txt {
+  color: #a1a1aa;
+}
+
+.doc-item:hover .doc-type-icon.type-pdf {
+  border-color: rgba(248, 113, 113, 0.4);
+  background: rgba(248, 113, 113, 0.11);
+}
+
+.doc-item:hover .doc-type-icon.type-md {
+  border-color: rgba(96, 165, 250, 0.4);
+  background: rgba(96, 165, 250, 0.11);
+}
+
 .doc-main {
   min-width: 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .doc-title-row {
@@ -545,6 +594,10 @@ body {
     gap: 8px;
   }
 
+  .doc-left {
+    width: 100%;
+  }
+
   .doc-title {
     white-space: normal;
     line-height: 1.35;
@@ -552,6 +605,7 @@ body {
 
   .doc-meta {
     width: 100%;
+    padding-left: 47px;
     justify-content: flex-start;
     flex-wrap: wrap;
   }

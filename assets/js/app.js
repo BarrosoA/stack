@@ -132,6 +132,36 @@
     handleHashRoute();
   }
 
+  function getFileIconSvg(type) {
+    const t = (type || 'pdf').toLowerCase();
+    if (t === 'pdf') {
+      return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <path d="M9 15h2a1.5 1.5 0 0 0 0-3H9v5"/>
+        <path d="M14 12v5"/>
+        <path d="M14 12h2"/>
+        <path d="M14 14.5h1.5"/>
+      </svg>`;
+    }
+    if (t === 'md') {
+      return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <path d="M8 17v-5l2 2.5 2-2.5v5"/>
+        <path d="M16 12v5"/>
+        <path d="M14.5 15.5L16 17l1.5-1.5"/>
+      </svg>`;
+    }
+    return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+      <polyline points="14 2 14 8 20 8"/>
+      <line x1="16" y1="13" x2="8" y2="13"/>
+      <line x1="16" y1="17" x2="8" y2="17"/>
+      <line x1="10" y1="9" x2="8" y2="9"/>
+    </svg>`;
+  }
+
   function renderDocList() {
     const docs = state.filteredDocs;
     els.docCount.textContent = String(docs.length);
@@ -155,6 +185,15 @@
 
       const savedPage = getSavedPage(doc.id);
       const showResume = savedPage > 1 && (!doc.pages || savedPage <= doc.pages);
+      const ext = (doc.type || 'pdf').toLowerCase();
+
+      const left = document.createElement('div');
+      left.className = 'doc-left';
+
+      const iconWrap = document.createElement('div');
+      iconWrap.className = `doc-type-icon type-${ext}`;
+      iconWrap.innerHTML = getFileIconSvg(ext);
+      left.appendChild(iconWrap);
 
       const main = document.createElement('div');
       main.className = 'doc-main';
@@ -174,6 +213,8 @@
         subEl.textContent = doc.subtitle;
         main.appendChild(subEl);
       }
+
+      left.appendChild(main);
 
       const meta = document.createElement('div');
       meta.className = 'doc-meta';
@@ -199,7 +240,7 @@
 
       const typePill = document.createElement('span');
       typePill.className = 'meta-pill';
-      typePill.textContent = (doc.type || 'pdf').toUpperCase();
+      typePill.textContent = ext.toUpperCase();
       meta.appendChild(typePill);
 
       const arrow = document.createElement('span');
@@ -208,7 +249,7 @@
         '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
       meta.appendChild(arrow);
 
-      btn.appendChild(main);
+      btn.appendChild(left);
       btn.appendChild(meta);
 
       btn.addEventListener('click', () => {
