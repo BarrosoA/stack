@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#09090b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>TheBox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <!-- Home View: The Rectangle -->
+    <main id="box-view" class="box-stage" aria-label="Document Library">
+      <section class="the-box" role="region" aria-labelledby="box-title">
+        <header class="box-header">
+          <div class="box-brand">
+            <span class="box-mark" aria-hidden="true"></span>
+            <h1 id="box-title" class="box-title">THE BOX</h1>
+            <span id="doc-count" class="box-count">0</span>
+          </div>
+          <div class="box-search-wrap">
+            <input
+              id="search-input"
+              type="search"
+              class="box-search"
+              placeholder="Filter..."
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="Filter documents"
+            />
+            <kbd class="search-kbd" aria-hidden="true">/</kbd>
+          </div>
+        </header>
+
+        <div id="doc-list" class="doc-list" role="list"></div>
+
+        <footer class="box-footer">
+          <span class="footer-hint">Select a document to read</span>
+          <span id="sync-status" class="footer-meta">documents/</span>
+        </footer>
+      </section>
+    </main>
+
+    <!-- Reader View -->
+    <section id="reader-view" class="reader-stage hidden" aria-label="Document Reader">
+      <header class="reader-bar">
+        <div class="reader-bar-left">
+          <button id="btn-back" class="icon-btn back-btn" type="button" title="Back to TheBox (Esc)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            <span class="btn-label">Box</span>
+          </button>
+          <div class="reader-doc-info">
+            <h2 id="reader-title" class="reader-title">Document</h2>
+          </div>
+        </div>
+
+        <div class="reader-bar-center">
+          <button id="btn-prev-page" class="icon-btn" type="button" title="Previous Page" aria-label="Previous Page">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <div class="page-indicator" title="Jump to page">
+            <input id="page-input" type="number" min="1" value="1" class="page-input" aria-label="Current page" />
+            <span class="page-sep">/</span>
+            <span id="page-total" class="page-total">1</span>
+          </div>
+          <button id="btn-next-page" class="icon-btn" type="button" title="Next Page" aria-label="Next Page">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div class="reader-bar-right">
+          <div class="zoom-controls">
+            <button id="btn-zoom-out" class="icon-btn" type="button" title="Zoom Out (-)" aria-label="Zoom Out">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <button id="btn-zoom-reset" class="text-btn mono-btn" type="button" title="Reset Zoom to Fit">
+              100%
+            </button>
+            <button id="btn-zoom-in" class="icon-btn" type="button" title="Zoom In (+)" aria-label="Zoom In">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+          </div>
+
+          <button id="btn-invert" class="icon-btn" type="button" title="Toggle Dark Page Mode (I)" aria-label="Toggle Dark Page Mode">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <a id="btn-raw" class="icon-btn" href="#" target="_blank" rel="noopener" title="Open Raw File" aria-label="Open Raw File">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+        </div>
+      </header>
+
+      <div id="reader-viewport" class="reader-viewport">
+        <div id="reader-status" class="reader-status hidden">Loading document...</div>
+        <div id="pages-container" class="pages-container"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>
+

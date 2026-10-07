@@ -1,0 +1,18 @@
+{
+  "updatedAt": "2026-10-07",
+  "documents": [
+    {
+      "id": "gradient-descent-for-machine-learning",
+      "title": "Gradient Descent for Machine Learning",
+      "subtitle": "From intuitive hill-walking to backpropagation and deep neural network training",
+      "filename": "gradient-descent-for-machine-learning.pdf",
+      "path": "documents/gradient-descent-for-machine-learning.pdf",
+      "type": "pdf",
+      "pages": 40,
+      "size": "1.5 MB",
+      "added": "2026-10-07",
+      "category": "Machine Learning"
+    }
+  ]
+}
+
