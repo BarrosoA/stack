@@ -207,36 +207,12 @@ body {
   background-color: var(--bg-row-active);
 }
 
-.doc-left {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  min-width: 0;
-  flex: 1;
-}
-
-.doc-type-icon {
-  width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  color: var(--text-muted);
-  margin-top: 2px;
-  transition: color 0.15s ease;
-}
-
-.doc-item:hover .doc-type-icon {
-  color: var(--text-primary);
-}
-
 .doc-main {
   min-width: 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .doc-title-row {
@@ -569,10 +545,6 @@ body {
     gap: 8px;
   }
 
-  .doc-left {
-    width: 100%;
-  }
-
   .doc-title {
     white-space: normal;
     line-height: 1.35;
@@ -580,7 +552,6 @@ body {
 
   .doc-meta {
     width: 100%;
-    padding-left: 30px;
     justify-content: flex-start;
     flex-wrap: wrap;
   }
