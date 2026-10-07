@@ -496,12 +496,12 @@
       slotEl.style.width = `${targetCssWidth}px`;
       slotEl.style.height = `${targetCssHeight}px`;
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+      const dpr = Math.min(Math.max(window.devicePixelRatio || 1, 2.25), 3);
       const scale = (targetCssWidth / unscaledVp.width) * dpr;
       const viewport = page.getViewport({ scale });
 
       const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d', { alpha: false });
+      const ctx = canvas.getContext('2d', { alpha: true });
       canvas.width = Math.floor(viewport.width);
       canvas.height = Math.floor(viewport.height);
 
