@@ -522,15 +522,24 @@
     }
   }
 
-  function applyZoom(newZoom) {
+  let zoomRenderTimer = null;
+
+  function applyZoom(newZoom, anchorClientY) {
     if (!state.pdfDoc) return;
-    const clamped = Math.min(2.5, Math.max(0.5, Math.round(newZoom * 100) / 100));
+    const clamped = Math.min(3.0, Math.max(0.5, Math.round(newZoom * 100) / 100));
     if (clamped === state.zoom) return;
 
-    const prevPage = state.currentPage;
+    const vp = els.readerViewport;
+    const prevScrollHeight = vp.scrollHeight || 1;
+    const vpRect = vp.getBoundingClientRect();
+    const focalOffset =
+      typeof anchorClientY === 'number'
+        ? anchorClientY - vpRect.top
+        : vp.clientHeight / 2;
+    const scrollRatio = (vp.scrollTop + focalOffset) / prevScrollHeight;
+
     state.zoom = clamped;
     els.btnZoomReset.textContent = `${Math.round(state.zoom * 100)}%`;
-    state.renderedPages.clear();
 
     const targetWidth = Math.round(state.basePageWidth * state.zoom);
     const targetHeight = Math.round(targetWidth * state.pageAspectRatio);
@@ -541,8 +550,18 @@
       slot.style.height = `${targetHeight}px`;
     });
 
-    jumpToPage(prevPage, false);
-    setupObservers();
+    const nextScrollHeight = vp.scrollHeight || 1;
+    state.isProgrammaticScroll = true;
+    vp.style.scrollBehavior = 'auto';
+    vp.scrollTop = Math.max(0, scrollRatio * nextScrollHeight - focalOffset);
+    vp.style.scrollBehavior = '';
+
+    clearTimeout(zoomRenderTimer);
+    zoomRenderTimer = setTimeout(() => {
+      state.isProgrammaticScroll = false;
+      state.renderedPages.clear();
+      setupObservers();
+    }, 120);
   }
 
   function jumpToPage(pageNum, smooth = true) {
@@ -726,6 +745,19 @@
       els.btnInvert.click();
     }
   });
+
+  window.addEventListener(
+    'wheel',
+    (e) => {
+      if (!state.activeDoc || !state.pdfDoc) return;
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        const delta = e.deltaY < 0 ? 0.12 : -0.12;
+        applyZoom(state.zoom + delta, e.clientY);
+      }
+    },
+    { passive: false }
+  );
 
   loadDocuments();
 })();
