@@ -740,23 +740,24 @@
     } else if (e.key === '0') {
       e.preventDefault();
       applyZoom(1.0);
-    } else if (e.key.toLowerCase() === 'i') {
+    } else if (e.key.toLowerCase() === 'i' && !e.ctrlKey && !e.metaKey) {
       e.preventDefault();
       els.btnInvert.click();
     }
   });
 
-  window.addEventListener(
+  document.addEventListener(
     'wheel',
     (e) => {
-      if (!state.activeDoc || !state.pdfDoc) return;
       if (e.ctrlKey || e.metaKey) {
         e.preventDefault();
-        const delta = e.deltaY < 0 ? 0.12 : -0.12;
-        applyZoom(state.zoom + delta, e.clientY);
+        if (state.activeDoc && state.pdfDoc) {
+          const delta = e.deltaY < 0 ? 0.12 : -0.12;
+          applyZoom(state.zoom + delta, e.clientY);
+        }
       }
     },
-    { passive: false }
+    { passive: false, capture: true }
   );
 
   loadDocuments();
