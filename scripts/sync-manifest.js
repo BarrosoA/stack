@@ -30,14 +30,24 @@ function syncManifest() {
     }
   }
 
+  const existingList = existing.documents || [];
   const existingByFile = new Map(
-    (existing.documents || []).map((doc) => [doc.filename, doc])
+    existingList.map((doc, idx) => [doc.filename, { ...doc, _order: idx }])
   );
 
   const files = fs
     .readdirSync(docsDir)
     .filter((f) => allowedExtensions.has(path.extname(f).toLowerCase()))
-    .sort((a, b) => a.localeCompare(b));
+    .sort((a, b) => {
+      const prevA = existingByFile.get(a);
+      const prevB = existingByFile.get(b);
+      if (prevA && prevB) return prevA._order - prevB._order;
+      if (prevA) return -1;
+      if (prevB) return 1;
+      const statA = fs.statSync(path.join(docsDir, a));
+      const statB = fs.statSync(path.join(docsDir, b));
+      return statA.mtimeMs - statB.mtimeMs;
+    });
 
   const today = new Date().toISOString().slice(0, 10);
 

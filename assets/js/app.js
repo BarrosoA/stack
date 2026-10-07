@@ -53,6 +53,27 @@
     localStorage.setItem(`thebox_page_${docId}`, String(pageNum));
   }
 
+  function getLastOpened(docId) {
+    const val = parseInt(localStorage.getItem(`thebox_opened_${docId}`), 10);
+    return Number.isFinite(val) && val > 0 ? val : 0;
+  }
+
+  function saveLastOpened(docId) {
+    if (!docId) return;
+    localStorage.setItem(`thebox_opened_${docId}`, String(Date.now()));
+  }
+
+  function sortDocuments(docs) {
+    return [...docs].sort((a, b) => {
+      const openedA = getLastOpened(a.id);
+      const openedB = getLastOpened(b.id);
+      if (openedA !== openedB) {
+        return openedB - openedA;
+      }
+      return (a._uploadOrder ?? 0) - (b._uploadOrder ?? 0);
+    });
+  }
+
   function slugToTitle(filename) {
     const base = filename.replace(/\.[^.]+$/, '');
     return base
@@ -126,6 +147,9 @@
     }
 
     docs = await fetchGithubFolderFallback(docs);
+    docs.forEach((doc, idx) => {
+      doc._uploadOrder = idx;
+    });
     state.documents = docs;
     state.filteredDocs = docs;
     renderDocList();
@@ -172,7 +196,7 @@
   }
 
   function renderDocList() {
-    const docs = state.filteredDocs;
+    const docs = sortDocuments(state.filteredDocs);
     els.docCount.textContent = String(docs.length);
     els.docList.innerHTML = '';
 
@@ -301,6 +325,7 @@
 
   async function openDocument(doc, initialPage) {
     cleanupReader();
+    saveLastOpened(doc.id);
     state.activeDoc = doc;
     state.zoom = 1.0;
     els.btnZoomReset.textContent = '100%';

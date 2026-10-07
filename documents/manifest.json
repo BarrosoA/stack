@@ -2,18 +2,6 @@
   "updatedAt": "2026-10-07",
   "documents": [
     {
-      "id": "100-page-ml",
-      "title": "100 Page ML",
-      "subtitle": "The Hundred-Page Machine Learning Book — Andriy Burkov",
-      "filename": "100-page-ml.pdf",
-      "path": "documents/100-page-ml.pdf",
-      "type": "pdf",
-      "pages": 152,
-      "size": "7.0 MB",
-      "added": "2026-10-07",
-      "category": "Machine Learning"
-    },
-    {
       "id": "gradient-descent-for-machine-learning",
       "title": "Gradient Descent for Machine Learning",
       "subtitle": "From intuitive hill-walking to backpropagation and deep neural network training",
@@ -36,6 +24,18 @@
       "size": "139 KB",
       "added": "2026-10-07",
       "category": "Deep Learning"
+    },
+    {
+      "id": "100-page-ml",
+      "title": "100 Page ML",
+      "subtitle": "The Hundred-Page Machine Learning Book — Andriy Burkov",
+      "filename": "100-page-ml.pdf",
+      "path": "documents/100-page-ml.pdf",
+      "type": "pdf",
+      "pages": 152,
+      "size": "7.0 MB",
+      "added": "2026-10-07",
+      "category": "Machine Learning"
     }
   ]
 }
