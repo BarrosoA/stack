@@ -251,6 +251,8 @@ body {
 .doc-title {
   font-size: 14.5px;
   font-weight: 500;
+  line-height: 1.4;
+  padding-bottom: 1px;
   color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
@@ -259,6 +261,8 @@ body {
 
 .doc-subtitle {
   font-size: 12.5px;
+  line-height: 1.45;
+  padding-bottom: 1px;
   color: var(--text-secondary);
   display: -webkit-box;
   -webkit-line-clamp: 1;

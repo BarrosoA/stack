@@ -490,7 +490,7 @@
 
       const unscaledVp = page.getViewport({ scale: 1 });
       const targetCssWidth = Math.round(state.basePageWidth * state.zoom);
-      const dpr = Math.min(Math.ceil(window.devicePixelRatio || 1) * 2, 4);
+      const dpr = window.devicePixelRatio || 1;
       const scale = (targetCssWidth / unscaledVp.width) * dpr;
       const viewport = page.getViewport({ scale });
 
@@ -501,6 +501,9 @@
 
       slotEl.style.width = `${canvas.width / dpr}px`;
       slotEl.style.height = `${canvas.height / dpr}px`;
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       await page.render({
         canvasContext: ctx,
