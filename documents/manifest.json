@@ -16,12 +16,12 @@
     {
       "id": "neural-networks-by-hand",
       "title": "Neural Networks by Hand",
-      "subtitle": "From Neurons to Backpropagation and Matrix Calculus",
+      "subtitle": "From Single-Neuron Intuition to Backpropagation and Matrix Calculus",
       "filename": "neural-networks-by-hand.pdf",
       "path": "documents/neural-networks-by-hand.pdf",
       "type": "pdf",
-      "pages": 12,
-      "size": "95 KB",
+      "pages": 17,
+      "size": "139 KB",
       "added": "2026-10-07",
       "category": "Deep Learning"
     }
