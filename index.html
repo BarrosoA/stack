@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css?v=4" />
+  <link rel="stylesheet" href="assets/css/style.css?v=5" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
 </head>
 <body>
@@ -24,17 +24,33 @@
             <h1 id="box-title" class="box-title">STACK</h1>
             <span id="doc-count" class="box-count">0</span>
           </div>
-          <div class="box-search-wrap">
-            <input
-              id="search-input"
-              type="search"
-              class="box-search"
-              placeholder="Filter..."
-              autocomplete="off"
-              spellcheck="false"
-              aria-label="Filter documents"
-            />
-            <kbd class="search-kbd" aria-hidden="true">/</kbd>
+          <div class="box-header-right">
+            <div class="box-search-wrap">
+              <input
+                id="search-input"
+                type="search"
+                class="box-search"
+                placeholder="Filter..."
+                autocomplete="off"
+                spellcheck="false"
+                aria-label="Filter documents"
+              />
+              <kbd class="search-kbd" aria-hidden="true">/</kbd>
+            </div>
+            <a
+              id="btn-upload"
+              class="upload-btn"
+              href="https://github.com/BarrosoA/stack/upload/main/documents"
+              target="_blank"
+              rel="noopener"
+              title="Add document on GitHub"
+              aria-label="Add document on GitHub"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </a>
           </div>
         </header>
 
@@ -42,7 +58,14 @@
 
         <footer class="box-footer">
           <span class="footer-hint">Select a document to read</span>
-          <span id="sync-status" class="footer-meta">documents/</span>
+          <a
+            id="sync-status"
+            class="footer-meta"
+            href="https://github.com/BarrosoA/stack/tree/main/documents"
+            target="_blank"
+            rel="noopener"
+            title="View documents folder on GitHub"
+          >documents/</a>
         </footer>
       </section>
     </main>

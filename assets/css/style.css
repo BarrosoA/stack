@@ -116,12 +116,39 @@ body {
   border-radius: 3px;
 }
 
+.box-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 60%;
+}
+
 .box-search-wrap {
   position: relative;
   display: flex;
   align-items: center;
-  width: 210px;
-  max-width: 50%;
+  width: 200px;
+}
+
+.upload-btn {
+  width: 31px;
+  height: 31px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+.upload-btn:hover {
+  background: var(--bg-row-hover);
+  border-color: var(--border-focus);
+  color: var(--text-primary);
 }
 
 .box-search {
@@ -320,6 +347,16 @@ body {
   color: var(--text-muted);
   background: var(--bg-box);
   flex-shrink: 0;
+}
+
+.footer-meta {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer-meta:hover {
+  color: var(--text-primary);
 }
 
 /* Reader Stage */
