@@ -1,11 +1,11 @@
-# TheBox
+# stack
 
 Minimalist static document reader for GitHub Pages across desktop and mobile devices.
 
 ## Directory Structure
 
 ```text
-TheBox/
+stack/
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml          # automated manifest sync and github pages deployment

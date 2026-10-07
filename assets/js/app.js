@@ -279,7 +279,7 @@
 
     els.readerTitle.textContent = doc.title || doc.filename;
     els.btnRaw.href = doc.path;
-    document.title = `${doc.title || doc.filename} — TheBox`;
+    document.title = `${doc.title || doc.filename} — stack`;
 
     const targetPage = initialPage || getSavedPage(doc.id) || 1;
     updateHash(doc.id, targetPage);
@@ -543,7 +543,7 @@
     state.activeDoc = null;
     els.readerView.classList.add('hidden');
     els.boxView.classList.remove('hidden');
-    document.title = 'TheBox';
+    document.title = 'stack';
     history.replaceState(null, '', window.location.pathname + window.location.search);
     renderDocList();
   }

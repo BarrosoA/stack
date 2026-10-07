@@ -1,4 +1,4 @@
-name: Deploy TheBox to GitHub Pages
+name: Deploy stack to GitHub Pages
 
 on:
   push:
