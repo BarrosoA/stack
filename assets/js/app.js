@@ -197,7 +197,7 @@
 
   function renderDocList() {
     const docs = sortDocuments(state.filteredDocs);
-    els.docCount.textContent = String(docs.length);
+    if (els.docCount) els.docCount.textContent = String(docs.length);
     els.docList.innerHTML = '';
 
     if (docs.length === 0) {
