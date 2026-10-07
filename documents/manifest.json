@@ -12,7 +12,18 @@
       "size": "1.5 MB",
       "added": "2026-10-07",
       "category": "Machine Learning"
+    },
+    {
+      "id": "neural-networks-by-hand",
+      "title": "Neural Networks by Hand",
+      "subtitle": "From Neurons to Backpropagation",
+      "filename": "neural-networks-by-hand.pdf",
+      "path": "documents/neural-networks-by-hand.pdf",
+      "type": "pdf",
+      "pages": 24,
+      "size": "122 KB",
+      "added": "2026-10-07",
+      "category": "Deep Learning"
     }
   ]
 }
-
