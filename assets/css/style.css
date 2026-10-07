@@ -260,9 +260,34 @@ body {
   letter-spacing: 0.04em;
 }
 
-.meta-resume {
-  color: var(--text-primary);
-  border-color: var(--border-focus);
+.doc-progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-muted);
+}
+
+.doc-progress.in-progress {
+  color: var(--text-secondary);
+}
+
+.progress-ring {
+  display: block;
+  transform: rotate(-90deg);
+  flex-shrink: 0;
+}
+
+.progress-ring-track {
+  stroke: var(--border-subtle);
+}
+
+.progress-ring-fill {
+  stroke: var(--text-secondary);
+  transition: stroke-dashoffset 0.2s ease, stroke 0.15s ease;
+}
+
+.doc-item:hover .progress-ring-fill {
+  stroke: var(--text-primary);
 }
 
 .doc-arrow {

@@ -132,6 +132,43 @@
     handleHashRoute();
   }
 
+  function getSavedTotalPages(doc) {
+    if (doc.pages) return doc.pages;
+    const val = parseInt(localStorage.getItem(`thebox_total_${doc.id}`), 10);
+    return Number.isFinite(val) && val > 0 ? val : null;
+  }
+
+  function createProgressElement(savedPage, totalPages) {
+    const wrap = document.createElement('span');
+    const inProgress = savedPage > 1;
+    wrap.className = `doc-progress${inProgress ? ' in-progress' : ''}`;
+
+    const radius = 5.25;
+    const circumference = 2 * Math.PI * radius;
+    const ratio = totalPages
+      ? Math.min(1, Math.max(0, inProgress ? savedPage / totalPages : 0))
+      : inProgress
+        ? 0.25
+        : 0;
+    const offset = circumference * (1 - ratio);
+
+    wrap.innerHTML = `<svg class="progress-ring" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+      <circle class="progress-ring-track" cx="7" cy="7" r="${radius}" fill="none" stroke-width="1.6"/>
+      <circle class="progress-ring-fill" cx="7" cy="7" r="${radius}" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="${circumference.toFixed(2)}" stroke-dashoffset="${offset.toFixed(2)}"/>
+    </svg>`;
+
+    const label = document.createElement('span');
+    if (inProgress && totalPages) {
+      label.textContent = `${savedPage}/${totalPages}`;
+    } else if (inProgress) {
+      label.textContent = `p.${savedPage}`;
+    } else if (totalPages) {
+      label.textContent = `${totalPages}p`;
+    }
+    wrap.appendChild(label);
+    return wrap;
+  }
+
   function renderDocList() {
     const docs = state.filteredDocs;
     els.docCount.textContent = String(docs.length);
@@ -154,7 +191,7 @@
       btn.setAttribute('role', 'listitem');
 
       const savedPage = getSavedPage(doc.id);
-      const showResume = savedPage > 1 && (!doc.pages || savedPage <= doc.pages);
+      const totalPages = getSavedTotalPages(doc);
       const ext = (doc.type || 'pdf').toLowerCase();
 
       const main = document.createElement('div');
@@ -179,17 +216,8 @@
       const meta = document.createElement('div');
       meta.className = 'doc-meta';
 
-      if (showResume) {
-        const resumePill = document.createElement('span');
-        resumePill.className = 'meta-pill meta-resume';
-        resumePill.textContent = `P. ${savedPage}`;
-        meta.appendChild(resumePill);
-      }
-
-      if (doc.pages) {
-        const pagesSpan = document.createElement('span');
-        pagesSpan.textContent = `${doc.pages}p`;
-        meta.appendChild(pagesSpan);
+      if (totalPages || savedPage > 1) {
+        meta.appendChild(createProgressElement(savedPage, totalPages));
       }
 
       if (doc.size) {
@@ -344,6 +372,7 @@
 
       state.pdfDoc = pdfDoc;
       state.totalPages = pdfDoc.numPages;
+      localStorage.setItem(`thebox_total_${doc.id}`, String(pdfDoc.numPages));
       els.pageTotal.textContent = String(pdfDoc.numPages);
       els.pageInput.max = String(pdfDoc.numPages);
 
