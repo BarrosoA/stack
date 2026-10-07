@@ -298,7 +298,8 @@ body {
   color: var(--text-muted);
 }
 
-.doc-progress.in-progress {
+.doc-progress.in-progress,
+.doc-progress.is-complete {
   color: var(--text-secondary);
 }
 
@@ -317,8 +318,20 @@ body {
   transition: stroke-dashoffset 0.2s ease, stroke 0.15s ease;
 }
 
-.doc-item:hover .progress-ring-fill {
-  stroke: var(--text-primary);
+.doc-progress.in-progress .progress-ring-fill {
+  stroke: #f59e0b;
+}
+
+.doc-item:hover .doc-progress.in-progress .progress-ring-fill {
+  stroke: #fbbf24;
+}
+
+.doc-progress.is-complete .progress-ring-fill {
+  stroke: #10b981;
+}
+
+.doc-item:hover .doc-progress.is-complete .progress-ring-fill {
+  stroke: #34d399;
 }
 
 .doc-arrow {

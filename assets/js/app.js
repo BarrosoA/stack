@@ -140,13 +140,15 @@
 
   function createProgressElement(savedPage, totalPages) {
     const wrap = document.createElement('span');
-    const inProgress = savedPage > 1;
-    wrap.className = `doc-progress${inProgress ? ' in-progress' : ''}`;
+    const isComplete = Boolean(totalPages && savedPage >= totalPages && savedPage > 1);
+    const inProgress = !isComplete && savedPage > 1;
+    const stateClass = isComplete ? ' is-complete' : inProgress ? ' in-progress' : '';
+    wrap.className = `doc-progress${stateClass}`;
 
     const radius = 5.25;
     const circumference = 2 * Math.PI * radius;
     const ratio = totalPages
-      ? Math.min(1, Math.max(0, inProgress ? savedPage / totalPages : 0))
+      ? Math.min(1, Math.max(0, (inProgress || isComplete) ? savedPage / totalPages : 0))
       : inProgress
         ? 0.25
         : 0;
@@ -158,7 +160,7 @@
     </svg>`;
 
     const label = document.createElement('span');
-    if (inProgress && totalPages) {
+    if ((inProgress || isComplete) && totalPages) {
       label.textContent = `${savedPage}/${totalPages}`;
     } else if (inProgress) {
       label.textContent = `p.${savedPage}`;
