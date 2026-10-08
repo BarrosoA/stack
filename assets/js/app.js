@@ -522,12 +522,16 @@
       const viewport = page.getViewport({ scale });
 
       const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d', { alpha: true });
+      const ctx = canvas.getContext('2d', { alpha: false });
       canvas.width = Math.round(viewport.width);
       canvas.height = Math.round(viewport.height);
 
-      slotEl.style.width = `${canvas.width / dpr}px`;
-      slotEl.style.height = `${canvas.height / dpr}px`;
+      const cssWidth = canvas.width / dpr;
+      const cssHeight = canvas.height / dpr;
+      slotEl.style.width = `${cssWidth}px`;
+      slotEl.style.height = `${cssHeight}px`;
+      canvas.style.width = `${cssWidth}px`;
+      canvas.style.height = `${cssHeight}px`;
 
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -575,6 +579,11 @@
     slots.forEach((slot) => {
       slot.style.width = `${targetWidth}px`;
       slot.style.height = `${targetHeight}px`;
+      const c = slot.querySelector('canvas');
+      if (c) {
+        c.style.width = `${targetWidth}px`;
+        c.style.height = `${targetHeight}px`;
+      }
     });
 
     const nextScrollHeight = vp.scrollHeight || 1;
@@ -725,6 +734,11 @@
         els.pagesContainer.querySelectorAll('.pdf-page-slot').forEach((slot) => {
           slot.style.width = `${targetWidth}px`;
           slot.style.height = `${targetHeight}px`;
+          const c = slot.querySelector('canvas');
+          if (c) {
+            c.style.width = `${targetWidth}px`;
+            c.style.height = `${targetHeight}px`;
+          }
         });
         setupObservers();
       }

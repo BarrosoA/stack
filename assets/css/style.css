@@ -559,12 +559,11 @@ body {
 
 .pages-container.invert-pages .pdf-page-slot {
   background: #121214;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.85);
-  border: 1px solid var(--border-subtle);
+  box-shadow: 0 0 0 1px var(--border-subtle), 0 8px 28px rgba(0, 0, 0, 0.85);
 }
 
 .pages-container.invert-pages .pdf-page-slot canvas {
-  filter: invert(1) hue-rotate(180deg) contrast(0.93);
+  filter: url(#dark-page-filter);
 }
 
 .pdf-page-slot canvas {
