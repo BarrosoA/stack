@@ -522,7 +522,7 @@
       const viewport = page.getViewport({ scale });
 
       const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d', { alpha: false });
+      const ctx = canvas.getContext('2d', { alpha: true });
       canvas.width = Math.round(viewport.width);
       canvas.height = Math.round(viewport.height);
 

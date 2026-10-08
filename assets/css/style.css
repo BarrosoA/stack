@@ -563,7 +563,7 @@ body {
 }
 
 .pages-container.invert-pages .pdf-page-slot canvas {
-  filter: url(#dark-page-filter);
+  filter: invert(1) hue-rotate(180deg) contrast(0.93);
 }
 
 .pdf-page-slot canvas {
