@@ -48,6 +48,30 @@
       "size": "248 KB",
       "added": "2026-10-08",
       "category": "Machine Learning"
+    },
+    {
+      "id": "virtual-analog-neural-audio-modeling-md",
+      "title": "Virtual Analog Neural Audio Modeling (Markdown)",
+      "subtitle": "Raw reference and source guide for neural audio template",
+      "filename": "virtual-analog-neural-audio-modeling.md",
+      "path": "documents/virtual-analog-neural-audio-modeling.md",
+      "type": "md",
+      "pages": 1,
+      "size": "47 KB",
+      "added": "2026-10-08",
+      "category": "Audio Deep Learning"
+    },
+    {
+      "id": "virtual-analog-neural-audio-modeling",
+      "title": "Virtual Analog Neural Audio Modeling",
+      "subtitle": "End-to-End Deep Learning Pipeline for Real-Time DSP and VST3 Audio Plugins",
+      "filename": "virtual-analog-neural-audio-modeling.pdf",
+      "path": "documents/virtual-analog-neural-audio-modeling.pdf",
+      "type": "pdf",
+      "pages": 8,
+      "size": "91 KB",
+      "added": "2026-10-08",
+      "category": "Audio Deep Learning"
     }
   ]
 }
