@@ -388,7 +388,7 @@
 
     try {
       await waitForPdfJs();
-      const pdfUrl = `${doc.path}?v=${encodeURIComponent((doc.size || '') + '_' + (doc.pages || ''))}`;
+      const pdfUrl = `${doc.path}?v=${encodeURIComponent((doc.size || '') + '_' + (doc.pages || '') + '_r2')}`;
       const loadingTask = window.pdfjsLib.getDocument({
         url: pdfUrl,
         cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
