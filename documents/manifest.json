@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-07",
+  "updatedAt": "2026-10-08",
   "documents": [
     {
       "id": "gradient-descent-for-machine-learning",
@@ -35,6 +35,18 @@
       "pages": 152,
       "size": "7.0 MB",
       "added": "2026-10-07",
+      "category": "Machine Learning"
+    },
+    {
+      "id": "machine-learning-fundamentals-for-deep-learning",
+      "title": "Machine Learning Fundamentals for Deep Learning",
+      "subtitle": "A concise explanatory foundation in statistics, learning theory, and classical ML",
+      "filename": "machine-learning-fundamentals-for-deep-learning.pdf",
+      "path": "documents/machine-learning-fundamentals-for-deep-learning.pdf",
+      "type": "pdf",
+      "pages": 16,
+      "size": "248 KB",
+      "added": "2026-10-08",
       "category": "Machine Learning"
     }
   ]
